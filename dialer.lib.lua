@@ -178,6 +178,8 @@ function drawButtons()
       pMonitor.setTextColor(colors.lightBlue)
     elseif (button.name == 'The Nether') then
       pMonitor.setTextColor(colors.red)
+    elseif (button.name == 'The Deep Dark') then
+      pMonitor.setTextColor(colors.black)
     else
       pMonitor.setTextColor(colors.white)
     end
