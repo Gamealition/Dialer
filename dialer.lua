@@ -12,9 +12,10 @@ debugging = true
 state = {
   width  = 0,  -- Screen width
   height = 0,  -- Screen height
+  scale  = 1.5,
   entryX = 0,  -- Entry columns X
   entryY = 0,  -- Entry columns Y
-  entryW = 24, -- Entry column width
+  entryW = 18, -- Entry column width
 
   buttons  = {},
   selected = nil -- Selected book
@@ -22,14 +23,13 @@ state = {
 
 pMonitor = nil
 pChest   = nil
+pMusic   = nil
 
 function Init()
-  print('Dialer Server 0.1')
+  print('Dialer Server 0.2')
 
-  pMonitor = requirePeripheral('monitor')
-  pChest   = requirePeripheral('container_chest')
-  debug('Discovered perhiperals')
-
+  redstone.setOutput('bottom', true)
+  discoverPeripherals()
   prepareUI()
   setPortal()
 
@@ -37,7 +37,7 @@ function Init()
 end
 
 function Loop()
-  print 'Running. Press END to terminate.'
+  print 'Running. Press HOME for help.'
   repeat
     -- Draw UI
     clearUI()
@@ -54,6 +54,12 @@ function Loop()
     if     event == 'key' then onKey(p1)
     elseif event == 'monitor_touch'
       then onTouch(p1, p2, p3)
+    elseif event == 'monitor_resize'
+      then onResize(p1)
+    elseif event == 'peripheral'
+      then onPeripheral(p1)
+    elseif event == 'peripheral_detach'
+      then onPeripheral(p1)
     end
 
   until exiting
@@ -61,7 +67,9 @@ function Loop()
 end
 
 function Exit()
-  destroyUI()
+  setPortal()
+  clearUI()
+  redstone.setOutput('bottom', false)
   print 'Goodbye.'
 end
 

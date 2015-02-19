@@ -4,7 +4,7 @@
 
 function debug(...)
   if not debugging then return end
-  print( unpack(arg) )
+  print('[Debug] ', unpack(arg) )
 end
 
 function debugTable(tbl)
@@ -14,14 +14,29 @@ function debugTable(tbl)
   end
 end
 
-function requirePeripheral(type)
-  return peripheral.find(type)
-    or error('No ' .. type .. ' was found');
+function discoverPeripherals()
+  pMonitor = waitForPeripheral('monitor')
+  pChest   = waitForPeripheral('iron')
+  pMusic   = waitForPeripheral('music')
+  debug('Discovered perhiperals')
+end
+
+function waitForPeripheral(type)
+  unit = nil
+  repeat
+    unit = peripheral.find(type)
+
+    if (unit == nil) then
+      pMusic.playSound('mob.bat.hurt', 1, 1)
+      print('Waiting for peripheral: ', type)
+      sleep(2.5)
+    end
+  until unit ~= nil
+  return unit
 end
 
 function prepareUI()
-  clearUI()
-  pMonitor.setTextScale(1.5)
+  pMonitor.setTextScale(state.scale)
 
   state.width,
   state.height = pMonitor.getSize()
@@ -34,6 +49,23 @@ function clearUI()
   debug('UI cleared')
 end
 
+function adjustScale(delta)
+  state.scale = state.scale + delta
+  if     state.scale > 5.0 then state.scale = 5
+  elseif state.scale < 0.5 then state.scale = 0.5
+  end
+  prepareUI()
+  print('Adjusted scale to ', state.scale)
+end
+
+function adjustColWidth(delta)
+  state.entryW = state.entryW + delta
+  if     state.entryW > 50 then state.entryW = 50
+  elseif state.entryW < 1  then state.entryW = 1
+  end
+  print('Adjusted col. width to ', state.entryW)
+end
+
 function setPortal(book, slot)
   -- Structure of a link book:
   -- book.display_name
@@ -44,6 +76,7 @@ function setPortal(book, slot)
   if (book == nil and slot == nil) then
     debug('Portal reset')
   else
+    pMusic.playSound('portal.travel', 1, 1)
     pChest.pushItem('UP', slot)
     state.selected = book
     debug('Portal set to: ', book.display_name)
@@ -55,11 +88,22 @@ function updateButtons()
   state.entryY  = 2, 5
   state.buttons = {}
   
+  -- Have to sort book items using indicies than
+  -- by table keys
   stacks = pChest.getAllStacks()
-  table.sort(stacks, sortBook)
+  books  = {}
   for slot, stack in pairs(stacks) do
-    addButton(slot, stack)
+    if (stack.name == "linkbook") then
+      stack.slot = slot
+      table.insert(books, stack)
+    end
   end
+
+  table.sort(books, sortBook)
+  for _, book in ipairs(books) do
+    addButton(book)
+  end
+  debug('Updated buttons')
 end
 
 function sortBook(a, b)
@@ -67,25 +111,24 @@ function sortBook(a, b)
        < b.display_name:lower()
 end
 
-function addButton(slot, book)
-  if (book.name ~= "linkbook") then return end
-
+function addButton(book)
   button   = {}
   bookName = book.display_name:sub(0, 20)
 
   button.x    = state.entryX
   button.y    = state.entryY
-  button.name = ' '..bookName..' '
+  button.name = bookName
+  button.lbl  = ' '..bookName..' '
   button.xEnd = state.entryX + state.entryW
   button.book = book
-  button.slot = slot
+  button.slot = book.slot
 
   table.insert(state.buttons, button)
   nextEntryPos()
 end
 
 function blinkButton(button)
-  for i = 0,5 do
+  for i = 0,3 do
     pMonitor.setCursorPos(button.x, button.y)
 
     if (i % 2 == 0) then
@@ -94,8 +137,8 @@ function blinkButton(button)
       pMonitor.setBackgroundColor(colors.blue)
     end
 
-    pMonitor.write(button.name)
-    sleep(0.05)
+    pMonitor.write(button.lbl)
+    sleep(0.1)
   end
 end
 
@@ -111,6 +154,7 @@ end
 function drawBanner(text)
   pMonitor.setCursorPos(1, 1)
   pMonitor.setBackgroundColor(colors.blue)
+  pMonitor.setTextColor(colors.white)
 
   drawFilledBox(pMonitor, 1, 1, state.width, 3)
   pMonitor.setCursorPos(2, 2)
@@ -126,10 +170,19 @@ function drawBanner(text)
 end
 
 function drawButtons()
-  pMonitor.setBackgroundColor(colors.gray)
-
   for _, button in ipairs(state.buttons) do
+    pMonitor.setBackgroundColor(colors.gray)
+
+    -- Special cases
+    if     (button.name == 'The End') then
+      pMonitor.setTextColor(colors.lightBlue)
+    elseif (button.name == 'The Nether') then
+      pMonitor.setTextColor(colors.red)
+    else
+      pMonitor.setTextColor(colors.white)
+    end
+
     pMonitor.setCursorPos(button.x, button.y)
-    pMonitor.write(button.name)
+    pMonitor.write(button.lbl)
   end  
 end

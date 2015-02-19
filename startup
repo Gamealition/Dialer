@@ -1,0 +1,4 @@
+-- Dialer, by Roy Curtis
+-- Using original code by KJ4IPS @
+-- files.haun.guru/ComputerCraft/
+shell.run("dialer.lua")
