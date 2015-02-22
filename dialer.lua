@@ -7,12 +7,12 @@ dofile('dialer.events.lua')
 dofile('dialer.paintutils.lua')
 
 exiting   = false
-debugging = true
+debugging = false
 
 state = {
   width  = 0,  -- Screen width
   height = 0,  -- Screen height
-  scale  = 1.5,
+  scale  = 1.0,
   entryX = 0,  -- Entry columns X
   entryY = 0,  -- Entry columns Y
   entryW = 18, -- Entry column width
@@ -26,7 +26,7 @@ pChest   = nil
 pMusic   = nil
 
 function Init()
-  print('Dialer Server 0.2')
+  print('Dialer Server 0.21')
 
   redstone.setOutput('bottom', true)
   discoverPeripherals()
@@ -73,4 +73,12 @@ function Exit()
   print 'Goodbye.'
 end
 
-Init()
+function Panic(err)
+  print("*** PANIC: ", err)
+  print("*** Auto-reboot in 5 seconds...")
+  sleep(5)
+  os.reboot()
+end
+
+success, err = pcall(Init)
+if not success then Panic(err) end
