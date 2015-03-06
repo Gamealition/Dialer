@@ -18,7 +18,8 @@ function onHelp()
   print '  DOWN to shrink text size'
   print '  LEFT to grow column size'
   print '  RIGHT to shrink column size'
-  print '  END to kill server'
+  print '  END to restart machine'
+  print '  CTRL+T for 5 seconds to kill'
 end
 
 function onTouch(side, x, y)

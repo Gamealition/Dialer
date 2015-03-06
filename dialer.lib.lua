@@ -94,6 +94,7 @@ function updateButtons()
   books  = {}
   for slot, stack in pairs(stacks) do
     if (stack.name == "linkbook") then
+      stack.name = getBookName(stack)
       stack.slot = slot
       table.insert(books, stack)
     end
@@ -106,19 +107,26 @@ function updateButtons()
   debug('Updated buttons')
 end
 
+function getBookName(book)
+  if (book.display_name == "Linking book") then
+    return book.myst_book.destination
+  else
+    return book.display_name
+  end
+end
+
 function sortBook(a, b)
-  return a.display_name:lower()
-       < b.display_name:lower()
+  return a.name:lower()
+       < b.name:lower()
 end
 
 function addButton(book)
   button   = {}
-  bookName = book.display_name:sub(0, 20)
 
   button.x    = state.entryX
   button.y    = state.entryY
-  button.name = bookName
-  button.lbl  = ' '..bookName..' '
+  button.name = book.name
+  button.lbl  = ' '..book.name:sub(0, 20)..' '
   button.xEnd = state.entryX + state.entryW
   button.book = book
   button.slot = book.slot

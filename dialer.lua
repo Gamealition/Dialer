@@ -26,7 +26,7 @@ pChest   = nil
 pMusic   = nil
 
 function Init()
-  print('Dialer Server 0.21')
+  print('Dialer Server 0.22')
 
   redstone.setOutput('bottom', true)
   discoverPeripherals()
@@ -51,7 +51,8 @@ function Loop()
     debug('Event: ', event)
 
     -- Events handled in dialer.events.lua
-    if     event == 'key' then onKey(p1)
+    if     event == 'key'
+      then onKey(p1)
     elseif event == 'monitor_touch'
       then onTouch(p1, p2, p3)
     elseif event == 'monitor_resize'
@@ -70,7 +71,7 @@ function Exit()
   setPortal()
   clearUI()
   redstone.setOutput('bottom', false)
-  print 'Goodbye.'
+  os.reboot()
 end
 
 function Panic(err)
