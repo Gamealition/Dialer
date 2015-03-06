@@ -27,7 +27,9 @@ function waitForPeripheral(type)
     unit = peripheral.find(type)
 
     if (unit == nil) then
-      pMusic.playSound('mob.bat.hurt', 1, 1)
+      if (pMusic ~= nil) then
+        pMusic.playSound('mob.bat.hurt', 1, 1)
+      end
       print('Waiting for peripheral: ', type)
       sleep(2.5)
     end
