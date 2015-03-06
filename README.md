@@ -32,6 +32,7 @@
 ### Installation
 
 Just upload all repository files, including `startup`, into the computer's directory. To find the directory:
+
 1. Execute "id" on the computer and [note the number](http://i.imgur.com/rIvTtrJ.png)
 2. In `world/computer` find or [create the computer's directory](http://i.imgur.com/gvtUbQY.png)
 

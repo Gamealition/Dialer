@@ -1,4 +1,5 @@
--- paintutils, with monitor context
+-- paintutils API as found in ComputerCraft
+-- Modified with monitor context
 
 local function drawPixelInternal( mon, xPos, yPos )
     mon.setCursorPos( xPos, yPos )
