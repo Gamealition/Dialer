@@ -173,7 +173,7 @@ function drawBanner(text)
     pMonitor.write(text)
   elseif (state.selected ~= nil) then
     pMonitor.write('Destination: '
-      .. state.selected.display_name)
+      .. state.selected.name)
   else
     pMonitor.write('Please select a destination')
   end
