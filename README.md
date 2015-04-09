@@ -3,9 +3,11 @@
 ## Requirements
 *As tested on Direwolf20 1.7.10 1.0.3 and 1.1.1*
 
-* ComputerCraft
-* MystCraft
-* Open Peripherals Core + Integration + Addons
+* ComputerCraft - Tested on 1.73
+* MystCraft - Tested on 0.11.0.00 & 0.11.3.00
+* OpenPeripherals Core - Tested on 0.5 & 1.0
+* OpenPeripherals Integration - Tested on 0.1 & 0.2
+* OpenPeripherals Addons - Tested on 0.2 & 0.3
 
 ## Known Issues
 

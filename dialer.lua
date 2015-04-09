@@ -26,7 +26,7 @@ pChest   = nil
 pMusic   = nil
 
 function Init()
-  print('Dialer Server 0.22')
+  print('Dialer Server 0.3')
 
   redstone.setOutput('bottom', true)
   discoverPeripherals()

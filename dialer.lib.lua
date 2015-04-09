@@ -95,6 +95,14 @@ function updateButtons()
   stacks = pChest.getAllStacks()
   books  = {}
   for slot, stack in pairs(stacks) do
+    -- OpenPeripheralCore 1.0 returns a "query"
+    -- object rather than the itemstack itself.
+    -- .all() from that object fetches all the
+    -- properties as before.
+    if (stack.all ~= nil) then
+      stack = stack.all()
+    end
+
     if (stack.name == "linkbook") then
       stack.name = getBookName(stack)
       stack.slot = slot
