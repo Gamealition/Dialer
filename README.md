@@ -6,25 +6,24 @@
 * ComputerCraft
 * MystCraft
 * Open Peripherals Core + Integration + Addons
-* IronChests (configurable)
 
 ## Known Issues
 
-* In rare circumstances, a book may go missing. I am unsure why this is; a possibility is that it is dropped and eventually dies on the floor.
+* Do not use IronChests chests, as they have been found to randomly destroy books. Safest containers to use are vanilla chests.
 * There is no official method for automatically turning on a computer after a server restart. The autonomous activator is therefore required for this.
 
 ## Setup
 
 ### Required components
-![Components](http://i.imgur.com/Vw2s8oT.jpg "Required components")
+![Components](http://i.imgur.com/MJwzQY3.png "Required components")
 
-1. An advanced computer (untested on standard)
-2. (optional) A wired modem connection to any required peripheral
-3. An advanced monitor of at least 2x2 in size
-4. A note block (audio output)
-5. An IronChests Iron Chest (can be changed in `dialer.lib.lua` line 19)
-6. A MystCraft portal of any valid configuration with a book recepticle that **must be directly above the chest**
-7. (optional) A (powered as of DW20 1.1.1) Autonomous Activator that:
+1. An advanced computer
+2. An advanced monitor of at least 2x2 in size
+3. A vanilla single/double chest (can be changed in `dialer.lib.lua` line 19)
+4. A MystCraft portal of any valid configuration with a book recepticle that **must be directly above the chest**
+5. A note block (audio output)
+6. *Optional*: A wired modem connection to any required peripheral
+7. *Optional*: A (powered as of DW20 1.1.1) Autonomous Activator that:
   * Must be underneath the computer
   * Must be [facing upwards](http://i.imgur.com/JZqknN2.png)
   * Must be configured to [turn off when a redstone signal is given](http://i.imgur.com/79ZwnHy.png)
