@@ -1,16 +1,17 @@
 "Dialer" is a ComputerCraft program that acts as a server for a touchscreen portal system. It can change a MystCraft portal to a given destination, out of any provided in a given chest.
 
 ## Requirements
-*As tested on Direwolf20 1.7.10 1.0.3 and 1.1.1*
+*As tested on Direwolf20 1.7.10 1.0.3, 1.1.1, 1.2.1 and 1.3.0*
 
 * ComputerCraft - Tested on 1.73
-* MystCraft - Tested on 0.11.0.00 & 0.11.3.00
-* OpenPeripherals Core - Tested on 0.5 & 1.0
-* OpenPeripherals Integration - Tested on 0.1 & 0.2
-* OpenPeripherals Addons - Tested on 0.2 & 0.3
+* MystCraft - Tested on 0.11.0.00 & 0.11.3.00 & 0.11.5.00
+* OpenPeripherals Core - Tested on 0.5 & 1.0 & 1.1.1
+* OpenPeripherals Integration - Tested on 0.1 & 0.2 & 0.2.2
+* OpenPeripherals Addons - Tested on 0.2 & 0.3 & 0.3.1
 
 ## Known Issues
 
+* As of Direwolf 1.3.0 (Core 1.1.1, Addons 0.3.1, Integration 0.2.2, Mystcraft 0.11.5.00), the code is no longer able to read names applied by the Writing Desk. Use anvil renames instead.
 * Do not use IronChests chests, as they have been found to randomly destroy books. Safest containers to use are vanilla chests.
 * There is no official method for automatically turning on a computer after a server restart. The autonomous activator is therefore required for this.
 
