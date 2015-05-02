@@ -198,6 +198,8 @@ function drawButtons()
       pMonitor.setTextColor(colors.red)
     elseif (button.name == 'The Deep Dark') then
       pMonitor.setTextColor(colors.black)
+    elseif (button.name == 'The Last Millenium') then
+      pMonitor.setTextColor(colors.lightGray)
     else
       pMonitor.setTextColor(colors.white)
     end
