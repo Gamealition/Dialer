@@ -16,8 +16,8 @@ end
 
 function discoverPeripherals()
   pMonitor = waitForPeripheral('monitor')
-  pChest   = waitForPeripheral('container_chest')
-  pMusic   = waitForPeripheral('music')
+  pChest   = waitForPeripheral('chest')
+  pMusic   = waitForPeripheral('note_block')
   debug('Discovered perhiperals')
 end
 

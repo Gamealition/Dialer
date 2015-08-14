@@ -1,13 +1,12 @@
 "Dialer" is a ComputerCraft program that acts as a server for a touchscreen portal system. It can change a MystCraft portal to a given destination, out of any provided in a given chest.
 
 ## Requirements
-*As tested on Direwolf20 1.7.10 1.0.3, 1.1.1, 1.2.1 and 1.3.0*
 
-* ComputerCraft - Tested on 1.73
-* MystCraft - Tested on 0.11.0.00 & 0.11.3.00 & 0.11.5.00
-* OpenPeripherals Core - Tested on 0.5 & 1.0 & 1.1.1
-* OpenPeripherals Integration - Tested on 0.1 & 0.2 & 0.2.2
-* OpenPeripherals Addons - Tested on 0.2 & 0.3 & 0.3.1
+* ComputerCraft 1.74
+* MystCraft 0.12.3.00
+* OpenPeripherals Core 1.2
+* OpenPeripherals Integration 0.3
+* OpenPeripherals Addons 0.4
 
 ## Known Issues
 
